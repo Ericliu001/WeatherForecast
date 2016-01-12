@@ -23,13 +23,16 @@ import com.ericliudeveloper.weatherforecast.entity.User;
 import com.ericliudeveloper.weatherforecast.entity.UserDAO;
 import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.entity.WeatherinfoDAO;
+import com.ericliudeveloper.weatherforecast.framework.UpdatableView;
+import com.ericliudeveloper.weatherforecast.framework.UpdateEnum;
+import com.ericliudeveloper.weatherforecast.model.HomepageModel;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DisplayWeatherInfoFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class DisplayWeatherInfoFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, UpdatableView<HomepageModel> {
     TextView tvUsername, tvSex, tvAge;
     TextView tvLatitude, tvLongitude, tvTimezone, tvSummary, tvTemperature;
     ProgressBar pbMain;
@@ -164,6 +167,11 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    @Override
+    public void displayData(HomepageModel model, UpdateEnum update) {
 
     }
 }
