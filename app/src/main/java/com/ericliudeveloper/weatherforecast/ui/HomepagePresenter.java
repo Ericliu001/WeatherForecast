@@ -19,6 +19,12 @@ public class HomepagePresenter extends Fragment implements Presenter {
     private Model mModel;
     private UpdatableView mUpdatableView;
 
+
+    public HomepagePresenter() {
+        mModel = new HomepageModel();
+        mModel.setPresenter(this);
+    }
+
     @Override
     public void setModel(Model model) {
         mModel = model;
@@ -27,6 +33,15 @@ public class HomepagePresenter extends Fragment implements Presenter {
     @Override
     public void setUpdatableView(UpdatableView view) {
         mUpdatableView = view;
+    }
+
+    @Override
+    public void loadInitialData() {
+
+
+        mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_USER, null);
+        mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
+
     }
 
     @Override
@@ -43,12 +58,7 @@ public class HomepagePresenter extends Fragment implements Presenter {
     public void onUserAction(UserActionEnum action, @Nullable Bundle args) {
         int actionId = action.getId();
 
-        if (actionId == DisplayWeatherInfoFragment.HomepageUserAction.INIT.getId()) {
-
-            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_USER, null);
-            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
-
-        } else if (actionId == DisplayWeatherInfoFragment.HomepageUserAction.REFRESH.getId()) {
+        if (actionId == DisplayWeatherInfoFragment.HomepageUserAction.REFRESH.getId()) {
             mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
         }
     }

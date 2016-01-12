@@ -9,7 +9,8 @@ import com.ericliudeveloper.weatherforecast.framework.Model;
 import com.ericliudeveloper.weatherforecast.framework.Presenter;
 import com.ericliudeveloper.weatherforecast.framework.UpdateEnum;
 import com.ericliudeveloper.weatherforecast.task.MainDisplayProcessor;
-import com.ericliudeveloper.weatherforecast.ui.MainActivity;
+
+import java.util.UUID;
 
 /**
  * Created by ericliu on 12/01/2016.
@@ -24,7 +25,11 @@ public class HomepageModel implements Model {
         int id = update.getId();
         if (id == HomepageUpdateRequest.GET_USER.getId()) {
 
-            MainDisplayProcessor.refreshMainDisplay(mPresenter.retrieveContext());
+            // unique transaction id
+            String transactionId = UUID.randomUUID().toString();
+
+            MainDisplayProcessor.refreshUser(mPresenter.retrieveContext(), transactionId);
+            MainDisplayProcessor.refreshWeatherInfo(mPresenter.retrieveContext(), transactionId);
 
         } else if (id == HomepageUpdateRequest.GET_WEATHERINFO.getId()) {
 

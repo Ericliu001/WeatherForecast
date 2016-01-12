@@ -5,9 +5,9 @@ package com.ericliudeveloper.weatherforecast.entity;
  */
 public class Currently {
 
-    private String time;
-    private String summary;
-    private String temperature;
+    String time;
+    String summary;
+    String temperature;
 
     public String getHumidity() {
         return humidity;
@@ -43,7 +43,8 @@ public class Currently {
 
     String humidity;
 
-    public Currently(){}
+    public Currently() {
+    }
 
     public Currently(String time, String summary, String temperature, String humidity) {
         this.time = time;

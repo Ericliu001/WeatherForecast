@@ -82,7 +82,6 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.onUserAction(HomepageUserAction.INIT, null);
 
         getLoaderManager().initLoader(0, null, this);
     }
@@ -196,7 +195,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            mPresenter.onUserAction(HomepageUserAction.INIT, null);
+            mPresenter.onUserAction(HomepageUserAction.REFRESH, null);
             return true;
         }
 
@@ -215,7 +214,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
 
 
     enum HomepageUserAction implements UserActionEnum {
-        INIT, REFRESH;
+        REFRESH;
 
 
         @Override

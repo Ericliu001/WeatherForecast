@@ -25,6 +25,9 @@ public class BaseActivity extends AppCompatActivity {
         checkNetworkAndShowErrorMsg();
     }
 
+
+
+
     protected void checkNetworkAndShowErrorMsg(){
         if (!isOnline()) {
             String title = getResources()

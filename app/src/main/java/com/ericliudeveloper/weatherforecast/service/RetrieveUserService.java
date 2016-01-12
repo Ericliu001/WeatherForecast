@@ -72,10 +72,7 @@ public class RetrieveUserService extends IntentService implements DBConstants.Co
             e.printStackTrace();
         }
 
-        // get weather info
-        Intent getWeatherIntent = new Intent(getApplicationContext(), RetrieveWeatherDataService.class);
-        getWeatherIntent.putExtra(COL_TRANSACTION_ID, transactionId);
-        getApplicationContext().startService(getWeatherIntent);
+
 
     }
 }

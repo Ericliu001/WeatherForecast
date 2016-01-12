@@ -13,6 +13,8 @@ public interface Presenter  {
 
     void setUpdatableView(UpdatableView view);
 
+    void loadInitialData();
+
     void onUpdateComplete(Model model, UpdateEnum update);
 
     void onUserAction(UserActionEnum action, @Nullable Bundle args);
