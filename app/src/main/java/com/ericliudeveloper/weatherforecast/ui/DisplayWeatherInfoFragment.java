@@ -26,6 +26,7 @@ import com.ericliudeveloper.weatherforecast.entity.User;
 import com.ericliudeveloper.weatherforecast.entity.UserDAO;
 import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.entity.WeatherinfoDAO;
+import com.ericliudeveloper.weatherforecast.framework.Presenter;
 import com.ericliudeveloper.weatherforecast.framework.UpdatableView;
 import com.ericliudeveloper.weatherforecast.framework.UpdateEnum;
 import com.ericliudeveloper.weatherforecast.framework.UserActionEnum;
@@ -37,7 +38,7 @@ import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
  * A simple {@link Fragment} subclass.
  */
 public class DisplayWeatherInfoFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, UpdatableView<HomepageModel> {
-    private UserActionListener mUserActionListener;
+    private Presenter mPresenter;
 
     private TextView tvUsername, tvSex, tvAge;
     private TextView tvLatitude, tvLongitude, tvTimezone, tvSummary, tvTemperature;
@@ -81,7 +82,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mUserActionListener.onUserAction(HomepageUserAction.INIT, null);
+        mPresenter.onUserAction(HomepageUserAction.INIT, null);
 
         getLoaderManager().initLoader(0, null, this);
     }
@@ -195,7 +196,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            mUserActionListener.onUserAction(HomepageUserAction.INIT, null);
+            mPresenter.onUserAction(HomepageUserAction.INIT, null);
             return true;
         }
 
@@ -208,14 +209,13 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
     }
 
     @Override
-    public void setUserActionListener(UserActionListener listener) {
-        mUserActionListener = listener;
+    public void setPresenter(Presenter presenter) {
+        mPresenter = presenter;
     }
 
 
-     enum HomepageUserAction implements UserActionEnum {
-        INIT
-        ,REFRESH;
+    enum HomepageUserAction implements UserActionEnum {
+        INIT, REFRESH;
 
 
         @Override

@@ -15,9 +15,7 @@ public interface Model {
      *
      * @return true if successful.
      */
-    boolean startModelUpdate(UpdateEnum update, @Nullable Bundle args);
+    void startModelUpdate(UpdateEnum update, @Nullable Bundle args);
     
-    interface OnUpdateCompleteListener{
-        void onUpdateComplete(Model model, UpdateEnum update);
-    }
+    void setPresenter(Presenter presenter);
 }

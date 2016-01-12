@@ -1,7 +1,6 @@
 package com.ericliudeveloper.weatherforecast.framework;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 /**
  * Created by Eric Liu on 12/01/2016.
@@ -10,7 +9,7 @@ public interface UpdatableView<M> {
 
     void displayData(M model, UpdateEnum update);
 
-    void setUserActionListener(UserActionListener listener);
+    void setPresenter(Presenter presenter);
 
 
     /**
@@ -25,6 +24,6 @@ public interface UpdatableView<M> {
          * Add the constants used to store values in the bundle to the Model implementation class
          * as final static protected strings.
          */
-        void onUserAction(UserActionEnum action, @Nullable Bundle args);
+
     }
 }

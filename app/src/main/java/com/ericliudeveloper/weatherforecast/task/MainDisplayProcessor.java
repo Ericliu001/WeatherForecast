@@ -1,6 +1,6 @@
 package com.ericliudeveloper.weatherforecast.task;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
@@ -18,7 +18,7 @@ public final class MainDisplayProcessor implements DBConstants.CommonColumns {
     }
 
 
-    public static void refreshMainDisplay(Activity activity) {
+    public static void refreshMainDisplay(Context context) {
 
         StatusDAO.clearDisplayingFlag();
         // unique transaction id
@@ -33,8 +33,8 @@ public final class MainDisplayProcessor implements DBConstants.CommonColumns {
         StatusDAO.save(status);
 
 
-        Intent getUserIntent = new Intent(activity, RetrieveUserService.class);
+        Intent getUserIntent = new Intent(context, RetrieveUserService.class);
         getUserIntent.putExtra(COL_TRANSACTION_ID, transactionId);
-        activity.startService(getUserIntent);
+        context.startService(getUserIntent);
     }
 }
