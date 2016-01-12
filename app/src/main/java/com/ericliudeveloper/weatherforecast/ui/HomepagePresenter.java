@@ -26,6 +26,12 @@ public class HomepagePresenter extends Fragment implements Presenter {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public void setModel(Model model) {
         mModel = model;
     }
