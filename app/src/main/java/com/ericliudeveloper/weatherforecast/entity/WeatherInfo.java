@@ -1,4 +1,6 @@
-package com.ericliudeveloper.weatherforecast.model;
+package com.ericliudeveloper.weatherforecast.entity;
+
+import com.ericliudeveloper.weatherforecast.model.Currently;
 
 /**
  * Created by liu on 17/06/15.

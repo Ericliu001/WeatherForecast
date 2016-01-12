@@ -3,7 +3,7 @@ package com.ericliudeveloper.weatherforecast.util;
 import android.util.JsonReader;
 
 import com.ericliudeveloper.weatherforecast.model.Currently;
-import com.ericliudeveloper.weatherforecast.model.WeatherInfo;
+import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 
 import java.io.IOException;
 

@@ -3,7 +3,7 @@ package com.ericliudeveloper.weatherforecast;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.ericliudeveloper.weatherforecast.model.WeatherInfo;
+import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.util.Parser;
 
 import junit.framework.TestCase;

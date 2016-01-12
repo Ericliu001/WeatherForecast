@@ -8,7 +8,7 @@ import android.content.OperationApplicationException;
 import android.os.RemoteException;
 
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
-import com.ericliudeveloper.weatherforecast.model.User;
+import com.ericliudeveloper.weatherforecast.entity.User;
 import com.ericliudeveloper.weatherforecast.model.UserDAO;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 

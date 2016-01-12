@@ -1,4 +1,4 @@
-package com.ericliudeveloper.weatherforecast.model;
+package com.ericliudeveloper.weatherforecast.entity;
 
 /**
  * Created by ericliu on 11/07/15.

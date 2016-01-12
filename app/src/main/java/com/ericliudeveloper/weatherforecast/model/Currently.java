@@ -5,9 +5,9 @@ package com.ericliudeveloper.weatherforecast.model;
  */
 public class Currently {
 
-    String time;
-    String summary;
-    String temperature;
+    private String time;
+    private String summary;
+    private String temperature;
 
     public String getHumidity() {
         return humidity;

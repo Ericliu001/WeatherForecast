@@ -17,7 +17,7 @@ import com.ericliudeveloper.weatherforecast.MyApplication;
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
 import com.ericliudeveloper.weatherforecast.model.Status;
 import com.ericliudeveloper.weatherforecast.model.StatusDAO;
-import com.ericliudeveloper.weatherforecast.model.WeatherInfo;
+import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.model.WeatherinfoDAO;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 import com.ericliudeveloper.weatherforecast.util.LastLocationFinder;
