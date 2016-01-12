@@ -21,6 +21,6 @@ package com.ericliudeveloper.weatherforecast.framework;
  */
 public interface UserActionEnum {
 
-    public int getId();
+    int getId();
 
 }

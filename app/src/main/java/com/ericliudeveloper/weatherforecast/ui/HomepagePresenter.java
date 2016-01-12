@@ -10,6 +10,7 @@ import com.ericliudeveloper.weatherforecast.framework.Presenter;
 import com.ericliudeveloper.weatherforecast.framework.UpdatableView;
 import com.ericliudeveloper.weatherforecast.framework.UpdateEnum;
 import com.ericliudeveloper.weatherforecast.framework.UserActionEnum;
+import com.ericliudeveloper.weatherforecast.model.HomepageModel;
 
 /**
  * Created by ericliu on 12/01/2016.
@@ -35,11 +36,20 @@ public class HomepagePresenter extends Fragment implements Presenter {
 
     @Override
     public void onUpdateComplete(Model model, UpdateEnum update) {
-
+        mUpdatableView.displayData(model, update);
     }
 
     @Override
     public void onUserAction(UserActionEnum action, @Nullable Bundle args) {
+        int actionId = action.getId();
 
+        if (actionId == DisplayWeatherInfoFragment.HomepageUserAction.INIT.getId()) {
+
+            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_USER, null);
+            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
+
+        } else if (actionId == DisplayWeatherInfoFragment.HomepageUserAction.REFRESH.getId()) {
+            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
+        }
     }
 }
