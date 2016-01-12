@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
-import com.ericliudeveloper.weatherforecast.model.Status;
-import com.ericliudeveloper.weatherforecast.model.StatusDAO;
+import com.ericliudeveloper.weatherforecast.entity.Status;
+import com.ericliudeveloper.weatherforecast.entity.StatusDAO;
 import com.ericliudeveloper.weatherforecast.service.RetrieveUserService;
 
 import java.util.UUID;

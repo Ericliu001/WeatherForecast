@@ -1,10 +1,9 @@
-package com.ericliudeveloper.weatherforecast.model;
+package com.ericliudeveloper.weatherforecast.entity;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
-import com.ericliudeveloper.weatherforecast.entity.User;
 
 /**
  * Created by ericliu on 11/07/15.

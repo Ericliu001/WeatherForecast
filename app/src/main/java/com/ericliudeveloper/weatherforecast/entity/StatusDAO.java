@@ -1,4 +1,4 @@
-package com.ericliudeveloper.weatherforecast.model;
+package com.ericliudeveloper.weatherforecast.entity;
 
 import android.content.ContentValues;
 import android.database.Cursor;

@@ -18,11 +18,11 @@ import android.widget.TextView;
 import com.ericliudeveloper.weatherforecast.MyApplication;
 import com.ericliudeveloper.weatherforecast.R;
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
-import com.ericliudeveloper.weatherforecast.model.StatusDAO;
+import com.ericliudeveloper.weatherforecast.entity.StatusDAO;
 import com.ericliudeveloper.weatherforecast.entity.User;
-import com.ericliudeveloper.weatherforecast.model.UserDAO;
+import com.ericliudeveloper.weatherforecast.entity.UserDAO;
 import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
-import com.ericliudeveloper.weatherforecast.model.WeatherinfoDAO;
+import com.ericliudeveloper.weatherforecast.entity.WeatherinfoDAO;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 
 

@@ -1,11 +1,10 @@
-package com.ericliudeveloper.weatherforecast.model;
+package com.ericliudeveloper.weatherforecast.entity;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
-import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 
 /**
