@@ -25,6 +25,7 @@ import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.entity.WeatherinfoDAO;
 import com.ericliudeveloper.weatherforecast.framework.UpdatableView;
 import com.ericliudeveloper.weatherforecast.framework.UpdateEnum;
+import com.ericliudeveloper.weatherforecast.framework.UserActionEnum;
 import com.ericliudeveloper.weatherforecast.model.HomepageModel;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 
@@ -33,9 +34,11 @@ import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
  * A simple {@link Fragment} subclass.
  */
 public class DisplayWeatherInfoFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, UpdatableView<HomepageModel> {
-    TextView tvUsername, tvSex, tvAge;
-    TextView tvLatitude, tvLongitude, tvTimezone, tvSummary, tvTemperature;
-    ProgressBar pbMain;
+    private UserActionListener mUserActionListener;
+
+    private TextView tvUsername, tvSex, tvAge;
+    private TextView tvLatitude, tvLongitude, tvTimezone, tvSummary, tvTemperature;
+    private ProgressBar pbMain;
 
     private WeatherInfo mWeatherInfo = null;
     private User mUser = null;
@@ -73,6 +76,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mUserActionListener.onUserAction(HomepageUserAction.INIT, null);
 
         getLoaderManager().initLoader(0, null, this);
     }
@@ -173,5 +177,22 @@ public class DisplayWeatherInfoFragment extends Fragment implements LoaderManage
     @Override
     public void displayData(HomepageModel model, UpdateEnum update) {
 
+    }
+
+    @Override
+    public void setUserActionListener(UserActionListener listener) {
+        mUserActionListener = listener;
+    }
+
+
+    public enum HomepageUserAction implements UserActionEnum {
+        INIT
+        ,REFRESH;
+
+
+        @Override
+        public int getId() {
+            return this.ordinal();
+        }
     }
 }

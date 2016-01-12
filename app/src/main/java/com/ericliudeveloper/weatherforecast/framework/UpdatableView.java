@@ -10,6 +10,8 @@ public interface UpdatableView<M> {
 
     void displayData(M model, UpdateEnum update);
 
+    void setUserActionListener(UserActionListener listener);
+
 
     /**
      * A listener for events fired off by a {@link Model}

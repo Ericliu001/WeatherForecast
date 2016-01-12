@@ -12,4 +12,6 @@ public interface Presenter extends UpdatableView.UserActionListener, Model.OnUpd
     void setUpdatableView(UpdatableView view);
 
     Context retrieveContext();
+
+
 }
