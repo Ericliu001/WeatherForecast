@@ -1,5 +1,6 @@
 package com.ericliudeveloper.weatherforecast.model;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -15,10 +16,17 @@ import java.util.UUID;
 /**
  * Created by ericliu on 12/01/2016.
  */
-public class HomepageModel implements Model {
+public class HomepageModel extends Fragment implements Model {
     private Presenter mPresenter;
     private User mUser;
     private WeatherInfo mWeatherInfo;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
     public void startModelUpdate(UpdateEnum update, @Nullable Bundle args) {
@@ -28,11 +36,11 @@ public class HomepageModel implements Model {
             // unique transaction id
             String transactionId = UUID.randomUUID().toString();
 
-            MainDisplayProcessor.refreshUser(mPresenter.retrieveContext(), transactionId);
-            MainDisplayProcessor.refreshWeatherInfo(mPresenter.retrieveContext(), transactionId);
+            MainDisplayProcessor.refreshUser(getActivity(), transactionId);
+            MainDisplayProcessor.refreshWeatherInfo(getActivity(), transactionId);
 
         } else if (id == HomepageUpdateRequest.GET_WEATHERINFO.getId()) {
-
+            MainDisplayProcessor.refreshWeatherInfo(getActivity(), "");
         }
 
     }

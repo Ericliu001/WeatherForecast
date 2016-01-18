@@ -1,7 +1,5 @@
 package com.ericliudeveloper.weatherforecast.ui;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -15,7 +13,7 @@ import com.ericliudeveloper.weatherforecast.model.HomepageModel;
 /**
  * Created by ericliu on 12/01/2016.
  */
-public class HomepagePresenter extends Fragment implements Presenter {
+public class HomepagePresenter implements Presenter {
     private Model mModel;
     private UpdatableView mUpdatableView;
 
@@ -25,11 +23,6 @@ public class HomepagePresenter extends Fragment implements Presenter {
         mModel.setPresenter(this);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
 
     @Override
     public void setModel(Model model) {
@@ -50,10 +43,6 @@ public class HomepagePresenter extends Fragment implements Presenter {
 
     }
 
-    @Override
-    public Context retrieveContext() {
-        return getActivity();
-    }
 
     @Override
     public void onUpdateComplete(Model model, UpdateEnum update) {
@@ -65,7 +54,7 @@ public class HomepagePresenter extends Fragment implements Presenter {
         int actionId = action.getId();
 
         if (actionId == DisplayWeatherInfoFragment.HomepageUserAction.REFRESH.getId()) {
-            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
+            mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_USER, null);
         }
     }
 }

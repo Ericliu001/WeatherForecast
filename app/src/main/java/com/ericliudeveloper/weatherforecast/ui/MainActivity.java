@@ -5,38 +5,50 @@ import android.os.Bundle;
 import com.ericliudeveloper.weatherforecast.R;
 import com.ericliudeveloper.weatherforecast.framework.Presenter;
 import com.ericliudeveloper.weatherforecast.framework.UpdatableView;
+import com.ericliudeveloper.weatherforecast.model.HomepageModel;
 
 
 public class MainActivity extends BaseActivity {
 
-    private String tag = getClass().getName();
+    private String viewTag = this.getClass().getSimpleName() + ".view";
+    private String modelTag = this.getClass().getSimpleName() + ".model";
 
-    DisplayWeatherInfoFragment mFragment;
+    DisplayWeatherInfoFragment mUpdatableView;
     HomepagePresenter mPresenter;
+    HomepageModel mModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        if (savedInstanceState == null) {
-            mFragment = new DisplayWeatherInfoFragment();
-            mPresenter = new HomepagePresenter();
-            getFragmentManager().beginTransaction().add(mPresenter, "presenter").commit();
-            getFragmentManager().beginTransaction().replace(R.id.container, mFragment, tag).commit();
-        } else {
-            mFragment = (DisplayWeatherInfoFragment) getFragmentManager().findFragmentByTag(tag);
-            mPresenter = (HomepagePresenter) getFragmentManager().findFragmentByTag("presenter");
+        mModel = (HomepageModel) getFragmentManager().findFragmentByTag(modelTag);
+        if (mModel == null) {
+            mModel = new HomepageModel();
+            getFragmentManager().beginTransaction().add(mModel, modelTag).commit();
         }
 
-        setupPresenter(mPresenter, mFragment);
+
+
+        if (savedInstanceState == null) {
+            mUpdatableView = new DisplayWeatherInfoFragment();
+            getFragmentManager().beginTransaction().replace(R.id.container, mUpdatableView, viewTag).commit();
+
+        } else {
+            mUpdatableView = (DisplayWeatherInfoFragment) getFragmentManager().findFragmentByTag(viewTag);
+        }
+
+        setupPresenter(mModel, mUpdatableView);
     }
 
-    private void setupPresenter(Presenter presenter, UpdatableView updatableView) {
+    private void setupPresenter(HomepageModel model, UpdatableView updatableView) {
+        Presenter presenter = new HomepagePresenter();
 
         presenter.setUpdatableView(updatableView);
+        presenter.setModel(model);
+
         updatableView.setPresenter(presenter);
+        model.setPresenter(presenter);
     }
 
 
