@@ -39,7 +39,7 @@ public class HomepagePresenter implements Presenter {
 
 
         mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_USER, null);
-        mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.GET_WEATHERINFO, null);
+        mModel.startModelUpdate(HomepageModel.HomepageUpdateRequest.REFRESH_ALL, null);
 
     }
 

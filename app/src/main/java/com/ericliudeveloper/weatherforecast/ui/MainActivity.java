@@ -3,7 +3,6 @@ package com.ericliudeveloper.weatherforecast.ui;
 import android.os.Bundle;
 
 import com.ericliudeveloper.weatherforecast.R;
-import com.ericliudeveloper.weatherforecast.framework.Presenter;
 import com.ericliudeveloper.weatherforecast.framework.UpdatableView;
 import com.ericliudeveloper.weatherforecast.model.HomepageModel;
 
@@ -29,7 +28,6 @@ public class MainActivity extends BaseActivity {
         }
 
 
-
         if (savedInstanceState == null) {
             mUpdatableView = new DisplayWeatherInfoFragment();
             getFragmentManager().beginTransaction().replace(R.id.container, mUpdatableView, viewTag).commit();
@@ -42,14 +40,21 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setupPresenter(HomepageModel model, UpdatableView updatableView) {
-        Presenter presenter = new HomepagePresenter();
+         mPresenter = new HomepagePresenter();
 
-        presenter.setUpdatableView(updatableView);
-        presenter.setModel(model);
+        mPresenter.setUpdatableView(updatableView);
+        mPresenter.setModel(model);
 
-        updatableView.setPresenter(presenter);
-        model.setPresenter(presenter);
+        updatableView.setPresenter(mPresenter);
+        model.setPresenter(mPresenter);
+
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.loadInitialData();
+
+    }
 }

@@ -33,14 +33,14 @@ public class HomepageModel extends Fragment implements Model {
         int id = update.getId();
         if (id == HomepageUpdateRequest.GET_USER.getId()) {
 
+            MainDisplayProcessor.refreshUser(getActivity(), "");
+
+        } else if (id == HomepageUpdateRequest.REFRESH_ALL.getId()) {
             // unique transaction id
             String transactionId = UUID.randomUUID().toString();
 
             MainDisplayProcessor.refreshUser(getActivity(), transactionId);
             MainDisplayProcessor.refreshWeatherInfo(getActivity(), transactionId);
-
-        } else if (id == HomepageUpdateRequest.GET_WEATHERINFO.getId()) {
-            MainDisplayProcessor.refreshWeatherInfo(getActivity(), "");
         }
 
     }
@@ -53,7 +53,7 @@ public class HomepageModel extends Fragment implements Model {
 
     public enum HomepageUpdateRequest implements UpdateEnum {
         GET_USER,
-        GET_WEATHERINFO;
+        REFRESH_ALL;
 
 
         @Override
