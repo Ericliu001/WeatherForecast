@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.ericliudeveloper.weatherforecast.MyApplication;
 import com.ericliudeveloper.weatherforecast.database.DBConstants;
@@ -123,7 +124,7 @@ public class HomepageModel extends Fragment implements ViewModel, LoaderManager.
                 }
 
                 mUser = UserDAO.getObjectFromCursor(data);
-                if (mUser != null) {
+                if (mUser != null && !TextUtils.isEmpty(mUser.getName())) {
                     mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.GET_USER, false);
 
                 }
