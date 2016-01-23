@@ -44,6 +44,7 @@ public class HomepagePresenter implements Presenter {
     @Override
     public void loadInitialData(Bundle args) {
         mDisplayView.displayData(null, HomepageRefreshDisplay.START_USER_PROGRESS_BAR);
+        mDisplayView.displayData(null, HomepageRefreshDisplay.START_WEATHERINFO_PROGRESS_BAR);
         mModel.onInitialModelUpdate(0, null);
     }
 
@@ -64,10 +65,24 @@ public class HomepagePresenter implements Presenter {
                 mDisplayView.displayData(null, HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR);
             }
 
-        } else if (query.getId() == HomepageQueryRequest.REFRESH_WEATHER.getId()) {
+            return;
+
+        }
+
+        if (query.getId() == HomepageQueryRequest.REFRESH_WEATHER.getId()) {
+
+
             WeatherInfo weatherInfo = ((HomepageModel) model).getmWeatherInfo();
             WeatherInfoDisplayUnit weatherInfoDisplayUnit = new WeatherInfoDisplayUnit(weatherInfo);
             mDisplayView.displayData(weatherInfoDisplayUnit, HomepageRefreshDisplay.DISPLAY_WEATHER);
+
+            if (!isConfigurationChange) {
+
+                mDisplayView.displayData(null, HomepageRefreshDisplay.SHOW_WEATHERINFO_FIELDS);
+                mDisplayView.displayData(null, HomepageRefreshDisplay.STOP_WEATHERINFO_PROGRESS_BAR);
+            }
+
+            return;
 
         }
 
@@ -82,6 +97,10 @@ public class HomepagePresenter implements Presenter {
             mDisplayView.displayData(null, HomepageRefreshDisplay.START_USER_PROGRESS_BAR);
             mDisplayView.displayData(null, HomepageRefreshDisplay.HIDE_USER_FIELDS);
             mModel.onStartModelUpdate(0, HomepageQueryRequest.GET_USER, null);
+
+
+            mDisplayView.displayData(null, HomepageRefreshDisplay.START_WEATHERINFO_PROGRESS_BAR);
+            mDisplayView.displayData(null, HomepageRefreshDisplay.HIDE_WEATHERINFO_FIELDS);
             mModel.onStartModelUpdate(0, HomepageQueryRequest.REFRESH_WEATHER, null);
         }
     }
@@ -122,7 +141,7 @@ public class HomepagePresenter implements Presenter {
 
 
     public enum HomepageRefreshDisplay implements RefreshDisplayEnum {
-        START_USER_PROGRESS_BAR, STOP_USER_PROGRESS_BAR, DISPLAY_WEATHER, DISPLAY_USER, HIDE_USER_FIELDS, SHOW_USER_FIELDS;
+        START_USER_PROGRESS_BAR, STOP_USER_PROGRESS_BAR, DISPLAY_WEATHER, DISPLAY_USER, HIDE_USER_FIELDS, SHOW_USER_FIELDS, START_WEATHERINFO_PROGRESS_BAR, STOP_WEATHERINFO_PROGRESS_BAR, HIDE_WEATHERINFO_FIELDS, SHOW_WEATHERINFO_FIELDS;
 
         @Override
         public int getId() {

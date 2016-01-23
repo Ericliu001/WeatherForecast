@@ -32,7 +32,7 @@ public class RetrieveUserService extends IntentService implements DBConstants.Co
     @Override
     protected void onHandleIntent(Intent intent) {
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

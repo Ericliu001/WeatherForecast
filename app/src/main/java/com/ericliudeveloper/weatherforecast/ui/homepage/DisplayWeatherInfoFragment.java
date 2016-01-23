@@ -178,39 +178,106 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
 
             changeProgressbarsVisibilityInUserFields(View.VISIBLE);
 
+            return;
+        }
 
-        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR.getId()) {
+
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR.getId()) {
 
             // stop progress bar
             changeProgressbarsVisibilityInUserFields(View.INVISIBLE);
 
+            return;
+        }
 
-        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_USER.getId()) {
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_USER.getId()) {
 
             // display the user
             User user = ((HomepagePresenter.UserDisplayUnit) unit).user;
             refreshUserDisplay(user);
 
+            return;
+        }
 
-        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_WEATHER.getId()) {
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_WEATHER.getId()) {
 
             // display weatherInfo
             WeatherInfo weatherInfo = ((HomepagePresenter.WeatherInfoDisplayUnit) unit).weatherInfo;
             refreshWeatherDisplay(weatherInfo);
 
+            return;
+        }
 
-        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.HIDE_USER_FIELDS.getId()) {
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.HIDE_USER_FIELDS.getId()) {
 
 
             // clear user fields
             hideUserFields();
+            return;
+        }
 
-        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.SHOW_USER_FIELDS.getId()) {
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.SHOW_USER_FIELDS.getId()) {
 
 
             // date update complete, show user fields again
             showUserFields();
+            return;
+
         }
+
+
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.HIDE_WEATHERINFO_FIELDS.getId()) {
+            hideWeatherInfoFields();
+
+            return;
+        }
+
+
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.SHOW_WEATHERINFO_FIELDS.getId()) {
+            showWeatherInfoFields();
+
+            return;
+        }
+
+
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.START_WEATHERINFO_PROGRESS_BAR.getId()) {
+
+            changeVisibilityOfProgressbarsInWeatherInfoFields(View.VISIBLE);
+            return;
+        }
+
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.STOP_WEATHERINFO_PROGRESS_BAR.getId()) {
+            changeVisibilityOfProgressbarsInWeatherInfoFields(View.INVISIBLE);
+            return;
+        }
+
+
+
+    }
+
+    private void changeVisibilityOfProgressbarsInWeatherInfoFields(int visible) {
+        pbLatitude.setVisibility(visible);
+        pbLongitude.setVisibility(visible);
+        pbTimezone.setVisibility(visible);
+        pbSummary.setVisibility(visible);
+        pbTemperature.setVisibility(visible);
+
+    }
+
+    private void showWeatherInfoFields() {
+        tvLatitude.setVisibility(View.VISIBLE);
+        tvLongitude.setVisibility(View.VISIBLE);
+        tvTimezone.setVisibility(View.VISIBLE);
+        tvSummary.setVisibility(View.VISIBLE);
+        tvTemperature.setVisibility(View.VISIBLE);
+    }
+
+    private void hideWeatherInfoFields() {
+        tvLatitude.setVisibility(View.INVISIBLE);
+        tvLongitude.setVisibility(View.INVISIBLE);
+        tvTimezone.setVisibility(View.INVISIBLE);
+        tvSummary.setVisibility(View.INVISIBLE);
+        tvTemperature.setVisibility(View.INVISIBLE);
     }
 
     private void changeProgressbarsVisibilityInUserFields(int visible) {
