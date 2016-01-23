@@ -27,8 +27,11 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
     private Presenter mPresenter;
 
     private TextView tvUsername, tvSex, tvAge;
+    private ProgressBar pbUsername, pbUserSex, pbUserAge;
+
+
     private TextView tvLatitude, tvLongitude, tvTimezone, tvSummary, tvTemperature;
-    private ProgressBar pbMain;
+    private ProgressBar pbLatitude, pbLongitude, pbTimezone, pbSummary, pbTemperature;
 
     private WeatherInfo mWeatherInfo = null;
     private User mUser = null;
@@ -59,6 +62,9 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         tvSex = (TextView) root.findViewById(R.id.tvSex);
         tvAge = (TextView) root.findViewById(R.id.tvAge);
 
+        pbUsername = (ProgressBar) root.findViewById(R.id.pbUsername);
+        pbUserSex = (ProgressBar) root.findViewById(R.id.pbUserSex);
+        pbUserAge = (ProgressBar) root.findViewById(R.id.pbUserAge);
 
         tvLatitude = (TextView) root.findViewById(R.id.tvLatitude);
         tvLongitude = (TextView) root.findViewById(R.id.tvLongitude);
@@ -66,7 +72,13 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         tvSummary = (TextView) root.findViewById(R.id.tvSummary);
         tvTemperature = (TextView) root.findViewById(R.id.tvTemperature);
 
-        pbMain = (ProgressBar) root.findViewById(R.id.pbMain);
+        pbLatitude = (ProgressBar) root.findViewById(R.id.pbLatitude);
+        pbLongitude = (ProgressBar) root.findViewById(R.id.pbLongitude);
+        pbTimezone = (ProgressBar) root.findViewById(R.id.pbTimezone);
+        pbSummary = (ProgressBar) root.findViewById(R.id.pbSummary);
+        pbTemperature = (ProgressBar) root.findViewById(R.id.pbTemperature);
+
+
     }
 
     @Override
@@ -103,21 +115,29 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         }
     }
 
+    private void hideUserFields() {
+        tvUsername.setVisibility(View.INVISIBLE);
+        tvSex.setVisibility(View.INVISIBLE);
+        tvAge.setVisibility(View.INVISIBLE);
+
+        changeProgressbarsVisibilityInUserFields(View.VISIBLE);
+    }
+
+    private void showUserFields() {
+        tvUsername.setVisibility(View.VISIBLE);
+        tvSex.setVisibility(View.VISIBLE);
+        tvAge.setVisibility(View.VISIBLE);
+
+        changeProgressbarsVisibilityInUserFields(View.INVISIBLE);
+    }
+
     private void refreshUserDisplay(User user) {
         String name = user.getName();
-        if (!TextUtils.isEmpty(name)) {
-            tvUsername.setText(name);
-        } else {
-            tvUsername.setText("");
-        }
+        tvUsername.setText(name);
 
 
         String sex = user.getSex();
-        if (!TextUtils.isEmpty(sex)) {
-            tvSex.setText(sex);
-        } else {
-            tvSex.setText("");
-        }
+        tvSex.setText(sex);
 
         int age = user.getAge();
         if (age >= 0) {
@@ -156,18 +176,15 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
 
     @Override
     public void displayData(DisplayUnit unit, Presenter.RefreshDisplayEnum refreshDisplay) {
-        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.START_PROGRESS_BAR.getId()) {
+        if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.START_USER_PROGRESS_BAR.getId()) {
 
-            // start progress bar
-            pbMain.setVisibility(View.VISIBLE);
-
+            changeProgressbarsVisibilityInUserFields(View.VISIBLE);
 
 
-        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.STOP_PROGRESS_BAR.getId()) {
+        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR.getId()) {
 
             // stop progress bar
-            pbMain.setVisibility(View.INVISIBLE);
-
+            changeProgressbarsVisibilityInUserFields(View.INVISIBLE);
 
 
         } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_USER.getId()) {
@@ -177,7 +194,6 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
             refreshUserDisplay(user);
 
 
-
         } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_WEATHER.getId()) {
 
             // display weatherInfo
@@ -185,9 +201,27 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
             refreshWeatherDisplay(weatherInfo);
 
 
+        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.HIDE_USER_FIELDS.getId()) {
 
+
+            // clear user fields
+            hideUserFields();
+
+        } else if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.SHOW_USER_FIELDS.getId()) {
+
+
+            // date update complete, show user fields again
+            showUserFields();
         }
     }
+
+    private void changeProgressbarsVisibilityInUserFields(int visible) {
+        // start progress bar
+        pbUsername.setVisibility(visible);
+        pbUserSex.setVisibility(visible);
+        pbUserAge.setVisibility(visible);
+    }
+
 
     @Override
     public void setPresenter(Presenter presenter) {
@@ -195,4 +229,9 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.recycle();
+    }
 }

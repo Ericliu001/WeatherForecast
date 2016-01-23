@@ -43,7 +43,7 @@ public class HomepagePresenter implements Presenter {
 
     @Override
     public void loadInitialData(Bundle args) {
-        mDisplayView.displayData(null, HomepageRefreshDisplay.START_PROGRESS_BAR);
+        mDisplayView.displayData(null, HomepageRefreshDisplay.START_USER_PROGRESS_BAR);
         mModel.onInitialModelUpdate(0, null);
     }
 
@@ -52,9 +52,17 @@ public class HomepagePresenter implements Presenter {
     public void onUpdateComplete(ViewModel model, ViewModel.QueryEnum query, boolean isConfigurationChange) {
 
         if (query.getId() == HomepageQueryRequest.GET_USER.getId()) {
+            
+
             User user = ((HomepageModel) model).getUser();
             UserDisplayUnit userDisplayUnit = new UserDisplayUnit(user);
             mDisplayView.displayData(userDisplayUnit, HomepageRefreshDisplay.DISPLAY_USER);
+
+            if (!isConfigurationChange) {
+                // do not stop the progressbar if this method is called due to the Activity re-creation
+                mDisplayView.displayData(null, HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR);
+                mDisplayView.displayData(null, HomepageRefreshDisplay.SHOW_USER_FIELDS);
+            }
 
         } else if (query.getId() == HomepageQueryRequest.REFRESH_WEATHER.getId()) {
             WeatherInfo weatherInfo = ((HomepageModel) model).getmWeatherInfo();
@@ -63,10 +71,6 @@ public class HomepagePresenter implements Presenter {
 
         }
 
-        if (!isConfigurationChange) {
-            // do not stop the progressbar if this method is called due to the Activity re-creation
-            mDisplayView.displayData(null, HomepageRefreshDisplay.STOP_PROGRESS_BAR);
-        }
 
     }
 
@@ -75,7 +79,8 @@ public class HomepagePresenter implements Presenter {
         int actionId = action.getId();
 
         if (actionId == HomepageUserAction.REFRESH_BUTTON_CLICKED.getId()) {
-            mDisplayView.displayData(null, HomepageRefreshDisplay.START_PROGRESS_BAR);
+            mDisplayView.displayData(null, HomepageRefreshDisplay.START_USER_PROGRESS_BAR);
+            mDisplayView.displayData(null, HomepageRefreshDisplay.HIDE_USER_FIELDS);
             mModel.onStartModelUpdate(0, HomepageQueryRequest.GET_USER, null);
             mModel.onStartModelUpdate(0, HomepageQueryRequest.REFRESH_WEATHER, null);
         }
@@ -117,7 +122,7 @@ public class HomepagePresenter implements Presenter {
 
 
     public enum HomepageRefreshDisplay implements RefreshDisplayEnum {
-        START_PROGRESS_BAR, STOP_PROGRESS_BAR, DISPLAY_WEATHER, DISPLAY_USER;
+        START_USER_PROGRESS_BAR, STOP_USER_PROGRESS_BAR, DISPLAY_WEATHER, DISPLAY_USER, HIDE_USER_FIELDS, SHOW_USER_FIELDS;
 
         @Override
         public int getId() {

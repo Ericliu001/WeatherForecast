@@ -30,12 +30,26 @@
                 android:layout_height="match_parent"
                 android:text="@string/username" />
 
-            <TextView
-                android:id="@+id/tvUsername"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="@string/no_value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:visibility="invisible"
+                    tools:text="Eric Liu" />
+
+                <ProgressBar
+                    android:id="@+id/pbUsername"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
 
         </TableRow>
 
@@ -48,12 +62,27 @@
                 android:layout_height="match_parent"
                 android:text="@string/sex" />
 
-            <TextView
-                android:id="@+id/tvSex"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="@string/no_value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:visibility="invisible"
+                    tools:text="Male" />
+
+
+                <ProgressBar
+                    android:id="@+id/pbUserSex"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
         <TableRow
@@ -65,12 +94,27 @@
                 android:layout_height="match_parent"
                 android:text="@string/age" />
 
-            <TextView
-                android:id="@+id/tvAge"
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="@string/no_value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:visibility="invisible"
+                    tools:text="34" />
+
+                <ProgressBar
+                    android:id="@+id/pbUserAge"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
         <TableRow
@@ -82,14 +126,26 @@
                 android:layout_height="match_parent"
                 android:text="@string/latitude" />
 
-            <TextView
-                android:id="@+id/tvLatitude"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="@string/no_value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvLatitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="@string/no_value" />
 
 
+                <ProgressBar
+                    android:id="@+id/pbLatitude"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
         <TableRow
@@ -101,13 +157,26 @@
                 android:layout_height="match_parent"
                 android:text="@string/longitude" />
 
-            <TextView
-                android:id="@+id/tvLongitude"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:text="@string/no_value"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvLongitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:text="@string/no_value"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:id="@+id/pbLongitude"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
         <TableRow
@@ -119,12 +188,25 @@
                 android:layout_height="match_parent"
                 android:text="@string/timezone" />
 
-            <TextView
-                android:id="@+id/tvTimezone"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:text="@string/no_value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvTimezone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:text="@string/no_value" />
+
+                <ProgressBar
+                    android:id="@+id/pbTimezone"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
 
@@ -137,12 +219,25 @@
                 android:layout_height="match_parent"
                 android:text="@string/summary" />
 
-            <TextView
-                android:id="@+id/tvSummary"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:text="No Value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:text="No Value" />
+
+                <ProgressBar
+                    android:id="@+id/pbSummary"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
         <TableRow
@@ -154,23 +249,28 @@
                 android:layout_height="match_parent"
                 android:text="@string/temperature" />
 
-            <TextView
-                android:id="@+id/tvTemperature"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:text="No Value" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:text="No Value" />
+
+                <ProgressBar
+                    android:id="@+id/pbTemperature"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="right"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
         </TableRow>
 
     </TableLayout>
 
-
-    <ProgressBar
-        android:id="@+id/pbMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-
-        />
 
 </FrameLayout>
