@@ -120,7 +120,6 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         tvSex.setVisibility(View.INVISIBLE);
         tvAge.setVisibility(View.INVISIBLE);
 
-        changeProgressbarsVisibilityInUserFields(View.VISIBLE);
     }
 
     private void showUserFields() {
@@ -128,7 +127,6 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         tvSex.setVisibility(View.VISIBLE);
         tvAge.setVisibility(View.VISIBLE);
 
-        changeProgressbarsVisibilityInUserFields(View.INVISIBLE);
     }
 
     private void refreshUserDisplay(User user) {

@@ -52,7 +52,7 @@ public class HomepagePresenter implements Presenter {
     public void onUpdateComplete(ViewModel model, ViewModel.QueryEnum query, boolean isConfigurationChange) {
 
         if (query.getId() == HomepageQueryRequest.GET_USER.getId()) {
-            
+
 
             User user = ((HomepageModel) model).getUser();
             UserDisplayUnit userDisplayUnit = new UserDisplayUnit(user);
@@ -60,8 +60,8 @@ public class HomepagePresenter implements Presenter {
 
             if (!isConfigurationChange) {
                 // do not stop the progressbar if this method is called due to the Activity re-creation
-                mDisplayView.displayData(null, HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR);
                 mDisplayView.displayData(null, HomepageRefreshDisplay.SHOW_USER_FIELDS);
+                mDisplayView.displayData(null, HomepageRefreshDisplay.STOP_USER_PROGRESS_BAR);
             }
 
         } else if (query.getId() == HomepageQueryRequest.REFRESH_WEATHER.getId()) {

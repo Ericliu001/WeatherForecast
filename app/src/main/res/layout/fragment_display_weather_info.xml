@@ -135,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="right"
-                    android:text="@string/no_value" />
+                    android:text="-33.234" />
 
 
                 <ProgressBar
@@ -165,8 +165,8 @@
                     android:id="@+id/tvLongitude"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:text="@string/no_value"
+                    android:gravity="right"
+                    android:text="151.23454"
                     android:textStyle="bold" />
 
                 <ProgressBar
@@ -196,8 +196,8 @@
                     android:id="@+id/tvTimezone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:text="@string/no_value" />
+                    android:gravity="right"
+                    tools:text="Australia/Sydney" />
 
                 <ProgressBar
                     android:id="@+id/pbTimezone"
@@ -227,8 +227,8 @@
                     android:id="@+id/tvSummary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:text="No Value" />
+                    android:gravity="right"
+                    tools:text="Clear" />
 
                 <ProgressBar
                     android:id="@+id/pbSummary"
@@ -257,8 +257,8 @@
                     android:id="@+id/tvTemperature"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:text="No Value" />
+                    android:gravity="right"
+                    tools:text="69.44" />
 
                 <ProgressBar
                     android:id="@+id/pbTemperature"
