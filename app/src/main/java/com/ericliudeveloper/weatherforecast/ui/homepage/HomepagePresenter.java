@@ -6,39 +6,18 @@ import android.support.annotation.Nullable;
 import com.ericliudeveloper.weatherforecast.entity.User;
 import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.mvp_framework.DisplayView;
-import com.ericliudeveloper.weatherforecast.mvp_framework.Presenter;
-import com.ericliudeveloper.weatherforecast.mvp_framework.StubPresenter;
 import com.ericliudeveloper.weatherforecast.mvp_framework.ViewModel;
+import com.ericliudeveloper.weatherforecast.mvp_framework.base.BasePresenter;
 
 
 /**
  * Created by ericliu on 12/01/2016.
  */
-public class HomepagePresenter implements Presenter {
-    private ViewModel mModel;
-    private DisplayView mDisplayView;
-
-    private int mPresenterId = -1;
+public class HomepagePresenter extends BasePresenter {
 
 
     public HomepagePresenter(int presenterId, DisplayView displayView, ViewModel viewModel) {
-        this.mPresenterId = presenterId;
-        mDisplayView = displayView;
-        mModel = viewModel;
-
-        mDisplayView.setPresenter(this);
-        mModel.setPresenter(0, new StubPresenter());
-    }
-
-
-    @Override
-    public void setViewModel(ViewModel model) {
-        mModel = model;
-    }
-
-
-    public void setDisplayView(DisplayView view) {
-        mDisplayView = view;
+        super(presenterId, displayView, viewModel);
     }
 
 
@@ -102,16 +81,6 @@ public class HomepagePresenter implements Presenter {
             mDisplayView.displayData(null, HomepageRefreshDisplay.HIDE_WEATHERINFO_FIELDS);
             mModel.onStartModelUpdate(0, HomepageQueryRequest.REFRESH_WEATHER, null);
         }
-    }
-
-    @Override
-    public void onViewCreated() {
-        mModel.setPresenter(mPresenterId, this);
-    }
-
-    @Override
-    public void onViewDestroyed() {
-        mModel.setPresenter(mPresenterId, new StubPresenter());
     }
 
 
