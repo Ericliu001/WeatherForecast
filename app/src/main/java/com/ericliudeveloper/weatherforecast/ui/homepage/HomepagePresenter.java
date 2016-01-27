@@ -7,6 +7,7 @@ import com.ericliudeveloper.weatherforecast.entity.User;
 import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.mvp_framework.DisplayView;
 import com.ericliudeveloper.weatherforecast.mvp_framework.Presenter;
+import com.ericliudeveloper.weatherforecast.mvp_framework.StubPresenter;
 import com.ericliudeveloper.weatherforecast.mvp_framework.ViewModel;
 
 
@@ -26,7 +27,7 @@ public class HomepagePresenter implements Presenter {
         mModel = viewModel;
 
         mDisplayView.setPresenter(this);
-        mModel.setPresenter(0, this);
+        mModel.setPresenter(0, new StubPresenter());
     }
 
 
@@ -56,8 +57,7 @@ public class HomepagePresenter implements Presenter {
 
 
             User user = ((HomepageModel) model).getUser();
-            UserDisplayUnit userDisplayUnit = new UserDisplayUnit(user);
-            mDisplayView.displayData(userDisplayUnit, HomepageRefreshDisplay.DISPLAY_USER);
+            mDisplayView.displayData(user, HomepageRefreshDisplay.DISPLAY_USER);
 
             if (!isConfigurationChange) {
                 // do not stop the progressbar if this method is called due to the Activity re-creation
@@ -73,8 +73,7 @@ public class HomepagePresenter implements Presenter {
 
 
             WeatherInfo weatherInfo = ((HomepageModel) model).getmWeatherInfo();
-            WeatherInfoDisplayUnit weatherInfoDisplayUnit = new WeatherInfoDisplayUnit(weatherInfo);
-            mDisplayView.displayData(weatherInfoDisplayUnit, HomepageRefreshDisplay.DISPLAY_WEATHER);
+            mDisplayView.displayData(weatherInfo, HomepageRefreshDisplay.DISPLAY_WEATHER);
 
             if (!isConfigurationChange) {
 
@@ -106,14 +105,13 @@ public class HomepagePresenter implements Presenter {
     }
 
     @Override
-    public void recycle() {
-        mDisplayView.setPresenter(null);
-        mModel.setPresenter(mPresenterId, null);
+    public void onViewCreated() {
+        mModel.setPresenter(mPresenterId, this);
+    }
 
-        mDisplayView = null;
-        mModel = null;
-
-        mPresenterId = -1;
+    @Override
+    public void onViewDestroyed() {
+        mModel.setPresenter(mPresenterId, new StubPresenter());
     }
 
 
@@ -149,23 +147,6 @@ public class HomepagePresenter implements Presenter {
         }
     }
 
-
-    public static class UserDisplayUnit implements DisplayView.DisplayUnit {
-        public final User user;
-
-        public UserDisplayUnit(User user) {
-            this.user = user;
-        }
-    }
-
-
-    public static class WeatherInfoDisplayUnit implements DisplayView.DisplayUnit {
-        public final WeatherInfo weatherInfo;
-
-        public WeatherInfoDisplayUnit(WeatherInfo weatherInfo) {
-            this.weatherInfo = weatherInfo;
-        }
-    }
 
 }
 

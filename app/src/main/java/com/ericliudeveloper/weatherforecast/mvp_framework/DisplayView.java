@@ -5,14 +5,10 @@ package com.ericliudeveloper.weatherforecast.mvp_framework;
  */
 public interface DisplayView {
 
-    void displayData(DisplayUnit object, Presenter.RefreshDisplayEnum refreshDisplay);
+    void displayData(Object element, Presenter.RefreshDisplayEnum refreshDisplay);
 
     void setPresenter(Presenter presenter);
 
 
-    /**
-     * An unit representing an data object to be displayed.
-     */
-    interface DisplayUnit {
-    }
+
 }

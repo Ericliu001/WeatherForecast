@@ -30,10 +30,12 @@ public interface Presenter {
 
     void onUserAction(UserActionEnum action, @Nullable Bundle args);
 
+
+    void onViewCreated();
     /**
      * de-reference the DisplayView and ViewModel so they can be garbage collected
      */
-    void recycle();
+    void onViewDestroyed();
 
     /**
      * Represents an action in the {@link DisplayView} performed by the user, for example when the

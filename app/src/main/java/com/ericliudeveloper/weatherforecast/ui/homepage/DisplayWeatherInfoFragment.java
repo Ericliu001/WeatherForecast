@@ -84,6 +84,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mPresenter.onViewCreated();
         mPresenter.loadInitialData(null);
     }
 
@@ -173,7 +174,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
 
 
     @Override
-    public void displayData(DisplayUnit unit, Presenter.RefreshDisplayEnum refreshDisplay) {
+    public void displayData(Object element, Presenter.RefreshDisplayEnum refreshDisplay) {
         if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.START_USER_PROGRESS_BAR.getId()) {
 
             changeProgressbarsVisibilityInUserFields(View.VISIBLE);
@@ -193,7 +194,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_USER.getId()) {
 
             // display the user
-            User user = ((HomepagePresenter.UserDisplayUnit) unit).user;
+            User user = (User) element;
             refreshUserDisplay(user);
 
             return;
@@ -202,7 +203,7 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         if (refreshDisplay.getId() == HomepagePresenter.HomepageRefreshDisplay.DISPLAY_WEATHER.getId()) {
 
             // display weatherInfo
-            WeatherInfo weatherInfo = ((HomepagePresenter.WeatherInfoDisplayUnit) unit).weatherInfo;
+            WeatherInfo weatherInfo = (WeatherInfo) element;
             refreshWeatherDisplay(weatherInfo);
 
             return;
@@ -252,7 +253,6 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
         }
 
 
-
     }
 
     private void changeVisibilityOfProgressbarsInWeatherInfoFields(int visible) {
@@ -297,6 +297,6 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.recycle();
+        mPresenter.onViewDestroyed();
     }
 }
