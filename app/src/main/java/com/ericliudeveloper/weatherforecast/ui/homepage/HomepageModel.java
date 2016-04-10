@@ -18,6 +18,7 @@ import com.ericliudeveloper.weatherforecast.entity.UserDAO;
 import com.ericliudeveloper.weatherforecast.entity.WeatherInfo;
 import com.ericliudeveloper.weatherforecast.entity.WeatherinfoDAO;
 import com.ericliudeveloper.weatherforecast.mvp_framework.Presenter;
+import com.ericliudeveloper.weatherforecast.mvp_framework.RequestStatus;
 import com.ericliudeveloper.weatherforecast.mvp_framework.ViewModel;
 import com.ericliudeveloper.weatherforecast.provider.ProviderContract;
 import com.ericliudeveloper.weatherforecast.task.MainDisplayProcessor;
@@ -29,11 +30,13 @@ import java.util.UUID;
  */
 public class HomepageModel extends Fragment implements ViewModel, LoaderManager.LoaderCallbacks<Cursor> {
 
-    private boolean isInitialLoading = true; // a flag indicating that the data is loaded for the first time.
 
     private Presenter mPresenter;
     private User mUser = null;
+    private RequestStatus userRequestStatus = RequestStatus.NOT_STARTED;
+
     private WeatherInfo mWeatherInfo = null;
+    private RequestStatus weatherRequestStatus = RequestStatus.NOT_STARTED;
 
     public WeatherInfo getmWeatherInfo() {
         return mWeatherInfo;
@@ -60,19 +63,9 @@ public class HomepageModel extends Fragment implements ViewModel, LoaderManager.
 
     @Override
     public void onInitialModelUpdate(int presenterId, @Nullable Bundle args) {
-        if (isInitialLoading) {
-            onStartModelUpdate(0, HomepagePresenter.HomepageQueryRequest.GET_USER, args);
-            onStartModelUpdate(0, HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER, args);
-            isInitialLoading = false;
-        } else {
-            if (mUser != null) {
-                mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.GET_USER, true);
-            }
+        onStartModelUpdate(0, HomepagePresenter.HomepageQueryRequest.GET_USER, args);
 
-            if (mWeatherInfo != null) {
-                mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER, true);
-            }
-        }
+        onStartModelUpdate(0, HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER, args);
 
     }
 
@@ -82,14 +75,33 @@ public class HomepageModel extends Fragment implements ViewModel, LoaderManager.
         if (id == HomepagePresenter.HomepageQueryRequest.GET_USER.getId()) {
 
             MainDisplayProcessor.refreshUser(getActivity(), "");
+            userRequestStatus = RequestStatus.LOADING;
 
         } else if (id == HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER.getId()) {
             // unique transaction id
             String transactionId = UUID.randomUUID().toString();
 
             MainDisplayProcessor.refreshUser(getActivity(), transactionId);
+            userRequestStatus = RequestStatus.LOADING;
             MainDisplayProcessor.refreshWeatherInfo(getActivity(), transactionId);
+            weatherRequestStatus = RequestStatus.LOADING;
         }
+
+    }
+
+    @Override
+    public RequestStatus getRequestStatus(QueryEnum update) {
+        int id = update.getId();
+
+        if (HomepagePresenter.HomepageQueryRequest.GET_USER.getId() == id) {
+            return userRequestStatus;
+        } else if (HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER.getId() == id) {
+            return weatherRequestStatus;
+        } else {
+            throw new IllegalArgumentException("the request is not handled");
+        }
+
+
 
     }
 
@@ -120,13 +132,14 @@ public class HomepageModel extends Fragment implements ViewModel, LoaderManager.
             } else if (syncStatus.equals(DBConstants.SyncStatus.SYNCED)) {
                 mWeatherInfo = WeatherinfoDAO.getObjectFromCursor(data);
                 if (mWeatherInfo != null) {
-                    mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER, false);
+                    mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.REFRESH_WEATHER);
+                    weatherRequestStatus = RequestStatus.SUCESS;
                 }
 
                 mUser = UserDAO.getObjectFromCursor(data);
                 if (mUser != null && !TextUtils.isEmpty(mUser.getName())) {
-                    mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.GET_USER, false);
-
+                    mPresenter.onUpdateComplete(this, HomepagePresenter.HomepageQueryRequest.GET_USER);
+                    userRequestStatus = RequestStatus.SUCESS;
                 }
             }
 

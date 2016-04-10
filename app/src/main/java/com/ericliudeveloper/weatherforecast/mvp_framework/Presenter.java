@@ -15,23 +15,26 @@ public interface Presenter {
 
     /**
      * this method is used to load the data for the first time when the View is just loaded into the screen.
+     *
      * @param args
-     */
-    void loadInitialData(Bundle args);
-
-    /**
-     * a callback for ViewModel to pass back the data when it's loaded.
-     * @param viewModel
-     * @param query
      * @param isConfigurationChange - a boolean to indicate if this method is called due to a re-creation of Views as a result
      *                              of a configuration change.
      */
-    void onUpdateComplete(ViewModel viewModel, ViewModel.QueryEnum query, boolean isConfigurationChange);
+    void loadInitialData(Bundle args, boolean isConfigurationChange);
+
+    /**
+     * a callback for ViewModel to pass back the data when it's loaded.
+     *
+     * @param viewModel
+     * @param query
+     */
+    void onUpdateComplete(ViewModel viewModel, ViewModel.QueryEnum query);
 
     void onUserAction(UserActionEnum action, @Nullable Bundle args);
 
 
     void onViewCreated();
+
     /**
      * de-reference the DisplayView and ViewModel so they can be garbage collected
      */

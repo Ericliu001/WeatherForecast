@@ -11,6 +11,7 @@ public interface ViewModel {
     /**
      * this method is called when data is needed for fill the just created Views,
      * it can be triggered by Configuration Changes as well
+     *
      * @param presenterId
      * @param args
      */
@@ -26,6 +27,9 @@ public interface ViewModel {
      * @param args
      */
     void onStartModelUpdate(int presenterId, QueryEnum update, @Nullable Bundle args);
+
+
+    RequestStatus getRequestStatus(QueryEnum update);
 
     void setPresenter(int presenterId, Presenter presenter);
 

@@ -18,12 +18,12 @@ public class StubPresenter implements Presenter {
     }
 
     @Override
-    public void loadInitialData(Bundle args) {
+    public void loadInitialData(Bundle args, boolean isConfigurationChange) {
 
     }
 
     @Override
-    public void onUpdateComplete(ViewModel viewModel, ViewModel.QueryEnum query, boolean isConfigurationChange) {
+    public void onUpdateComplete(ViewModel viewModel, ViewModel.QueryEnum query) {
 
     }
 

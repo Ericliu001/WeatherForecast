@@ -85,7 +85,11 @@ public class DisplayWeatherInfoFragment extends Fragment implements DisplayView 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPresenter.onViewCreated();
-        mPresenter.loadInitialData(null);
+        if (savedInstanceState == null) {
+            mPresenter.loadInitialData(null, false);
+        } else {
+            mPresenter.loadInitialData(null, true);
+        }
     }
 
     private void refreshWeatherDisplay(WeatherInfo info) {

@@ -19,7 +19,7 @@ public abstract class BasePresenter implements Presenter {
         mDisplayView = displayView;
         mModel = viewModel;
         mDisplayView.setPresenter(this);
-        mModel.setPresenter(0, new StubPresenter());
+        mModel.setPresenter(0, new StubPresenter()); // to prevent null pointer when the data comes back before the view is created.
     }
 
 
@@ -42,7 +42,7 @@ public abstract class BasePresenter implements Presenter {
 
     @Override
     public void onViewDestroyed() {
-        mModel.setPresenter(mPresenterId, new StubPresenter());
+        mModel.setPresenter(mPresenterId, new StubPresenter()); // use a StubPresenter to de-reference the View and prevent null pointer.
     }
 
 }
